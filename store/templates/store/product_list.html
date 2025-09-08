@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>فروشگاه من</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>فروشگاه محصولات</h1>
+
+    <div class="products">
+        {% for product in products %}
+            <div class="product-card">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+                <h3>{{ product.name }}</h3>
+                <p>قیمت: {{ product.price }} تومان</p>
+
+                <form action="{% url 'store:add_to_cart' product.id %}" method="post">
+                    {% csrf_token %}
+                    <label>تعداد:
+                        <input type="number" name="quantity" value="1" min="1" max="10">
+                    </label>
+                    <button type="submit">افزودن به سبد خرید</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

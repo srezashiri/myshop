@@ -1,0 +1,62 @@
+/* کل صفحه */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+/* عنوان صفحه */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* بخش محصولات */
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* کارت محصول */
+.product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* تصویر محصول */
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* دکمه افزودن به سبد خرید */
+.product-card button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.product-card button:hover {
+    background-color: #0056b3;
+}
+
+/* فیلد تعداد */
+.product-card input[type="number"] {
+    width: 50px;
+    padding: 4px;
+    margin-left: 5px;
+}

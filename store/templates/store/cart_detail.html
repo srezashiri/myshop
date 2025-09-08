@@ -1,0 +1,53 @@
+{% load static cart_extras %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>سبد خرید</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>سبد خرید شما</h1>
+
+    {% if cart_items %}
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>محصول</th>
+                    <th>تعداد</th>
+                    <th>قیمت واحد</th>
+                    <th>جمع</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>
+                        <form action="{% url 'store:update_cart' item.product.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                            <button type="submit">بروزرسانی</button>
+                        </form>
+                    </td>
+                    <td>{{ item.product.price }} تومان</td>
+                    <td>{{ item.product.price|multiply:item.quantity }} تومان</td>
+                    <td>
+                        <form action="{% url 'store:remove_from_cart' item.product.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">حذف</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'store:checkout' %}" class="checkout-button">ادامه خرید / تسویه</a>
+    {% else %}
+        <p>سبد خرید خالی است.</p>
+        <a href="{% url 'store:product_list' %}">بازگشت به فروشگاه</a>
+    {% endif %}
+
+</body>
+</html>
